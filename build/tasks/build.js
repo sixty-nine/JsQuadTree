@@ -7,7 +7,7 @@ module.exports = function (grunt) {
 
     var buildRequirejsConfig = function () {
 
-        var requirejsTemplate = grunt.file.read('build/requirejs.json');
+        var requirejsTemplate = grunt.file.read('build/requirejs.json.tpl');
         return grunt.template.process(requirejsTemplate, { data : { path : '../' }});
 
     };

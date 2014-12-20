@@ -1,7 +1,7 @@
 define(function (require) {
     'use strict';
 
-    var MAX_POINTS = 300;
+    var MAX_POINTS = 5000;
 
     var Point = require('./model/Point'),
         BoundingBox = require('./model/BoundingBox'),

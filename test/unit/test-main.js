@@ -15,9 +15,19 @@
         }
     });
 
-    var requirejsConfig = <%= requirejs %>;
+    var requirejsConfig = {
+    "paths": {
+        "jquery": "../bower_components/jquery/dist/jquery",
+        "underscore": "../bower_components/underscore/underscore",
+        "backbone": "../bower_components/backbone/backbone",
+        "text": "../bower_components/requirejs-text/text"
+    },
+    "shim": {
+    }
+}
+;
 
-    requirejsConfig.baseUrl = '/base/frontend/app';
+    requirejsConfig.baseUrl = '/base/src/js';
     requirejsConfig.deps =  allTestFiles; // dynamically load all test files
     requirejsConfig.callback = window.__karma__.start;
 

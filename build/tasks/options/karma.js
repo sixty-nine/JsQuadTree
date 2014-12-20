@@ -1,4 +1,3 @@
-// TODO: properly configure
 module.exports = {
     unit: {
         configFile: 'karma.conf.js'
