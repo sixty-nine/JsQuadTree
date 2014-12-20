@@ -3,6 +3,7 @@ define(function (require) {
 
     var _ = require('underscore'),
         Point = require('model/Point'),
+        Rect = require('model/Rect'),
         BoundingBox = require('model/BoundingBox');
 
     describe('model/BoundingBox', function () {
@@ -81,6 +82,16 @@ define(function (require) {
                     'Assertion ' + (i + 1) + ', ' + JSON.stringify(boxes[i].input) + ', ' + JSON.stringify(bb1)
                 );
             }
+        });
+
+        it('can be created from a Rect', function () {
+
+            var rect = new Rect(0, 0, 10, 10),
+                bb = BoundingBox.fromRect(rect);
+
+            expect(bb.x).toBe(5);
+            expect(bb.y).toBe(5);
+            expect(bb.halfSize).toBe(5);
         });
 
     });

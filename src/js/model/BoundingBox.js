@@ -1,4 +1,4 @@
-    define(function (require) {
+define(function (require) {
     'use strict';
 
     var _ = require('underscore'),
@@ -39,6 +39,11 @@
             return memo === null ? edge.toJSON() : memo +', ' + edge.toJSON();
         }, null);
         return '[' + res + ']';
+    };
+
+    BoundingBox.fromRect = function (rect) {
+        var halfSize = rect.w / 2;
+        return new BoundingBox(rect.x + halfSize, rect.y + halfSize, halfSize);
     };
 
     return BoundingBox;
