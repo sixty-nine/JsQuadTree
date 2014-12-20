@@ -7,10 +7,6 @@ var SixtyNine = SixtyNine || {};
     var NODE_CAPACITY = 4;
     var MAX_DEPTH = Infinity;
 
-    function log() {
-//        console.log(arguments);
-    }
-
     SixtyNine.Point = function (x, y) {
         this.x = x;
         this.y = y;
@@ -107,7 +103,6 @@ var SixtyNine = SixtyNine || {};
 
         this.subdivide = function () {
 
-            log('SUBDIVIDE');
             var self = this,
                 centerX = this.boundaries.x,
                 centerY = this.boundaries.y,
@@ -126,23 +121,11 @@ var SixtyNine = SixtyNine || {};
             this.children.push(t3);
             this.children.push(t4);
 
-            _.each(this.children, function (child) {
-                log('Child:', child.boundaries);
-            });
-
             while(point = this.points.pop()) {
-                log('Relocating', point);
-                if (t1.insert(point, self.depth + 1)) {
-                    log('Inserted in child 1');
-                } else if (t2.insert(point, self.depth + 1)) {
-                    log('Inserted in child 2');
-                } else if (t3.insert(point, self.depth + 1)) {
-                    log('Inserted in child 3');
-                } else if (t4.insert(point, self.depth + 1)) {
-                    log('Inserted in child 4');
-                } else {
-                    log('ERROR: cannot insert');
-                }
+                t1.insert(point, self.depth + 1)
+                || t2.insert(point, self.depth + 1)
+                || t3.insert(point, self.depth + 1)
+                || t4.insert(point, self.depth + 1);
             }
 
             this.isDivided = true;
@@ -151,33 +134,38 @@ var SixtyNine = SixtyNine || {};
         };
 
         this.queryRange = function (bb) {
-/*
- // Prepare an array of results
- Array of XY pointsInRange;
+            /*
+            TODO: implement
 
- // Automatically abort if the range does not intersect this quad
- if (!boundary.intersectsAABB(range))
- return pointsInRange; // empty list
+            Pseudo code from wikipedia
+            ==========================
 
- // Check objects at this quad level
- for (int p := 0; p < points.size; p++)
- {
- if (range.containsPoint(points[p]))
- pointsInRange.append(points[p]);
- }
+             // Prepare an array of results
+             Array of XY pointsInRange;
 
- // Terminate here, if there are no children
- if (northWest == null)
- return pointsInRange;
+             // Automatically abort if the range does not intersect this quad
+             if (!boundary.intersectsAABB(range))
+             return pointsInRange; // empty list
 
- // Otherwise, add the points from the children
- pointsInRange.appendArray(northWest->queryRange(range));
- pointsInRange.appendArray(northEast->queryRange(range));
- pointsInRange.appendArray(southWest->queryRange(range));
- pointsInRange.appendArray(southEast->queryRange(range));
+             // Check objects at this quad level
+             for (int p := 0; p < points.size; p++)
+             {
+             if (range.containsPoint(points[p]))
+             pointsInRange.append(points[p]);
+             }
 
- return pointsInRange;
- */
+             // Terminate here, if there are no children
+             if (northWest == null)
+             return pointsInRange;
+
+             // Otherwise, add the points from the children
+             pointsInRange.appendArray(northWest->queryRange(range));
+             pointsInRange.appendArray(northEast->queryRange(range));
+             pointsInRange.appendArray(southWest->queryRange(range));
+             pointsInRange.appendArray(southEast->queryRange(range));
+
+             return pointsInRange;
+             */
         };
     };
 
