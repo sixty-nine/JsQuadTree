@@ -1,4 +1,3 @@
-// TODO: properly configure
 module.exports = {
     production: {
         files: [
