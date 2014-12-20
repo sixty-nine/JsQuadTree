@@ -1,0 +1,26 @@
+{
+    "name": "JsQuadTree",
+    "version": "0.0.0",
+    "homepage": "https://github.com/sixty-nine/JsQuadTree",
+    "authors": [
+        "Daniele Barsotti <sixtynine.db@gmail.com>"
+    ],
+    "description": "QuadTree in Javascript",
+    "moduleType": [
+        "amd"
+    ],
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "jquery": "1.11.0",
+        "underscore": "1.6.0",
+        "requirejs": "2.1.14",
+        "requirejs-text": "2.0.12"
+    }
+}

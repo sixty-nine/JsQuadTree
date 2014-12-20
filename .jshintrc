@@ -1,0 +1,35 @@
+{
+    "globals": {
+        "define": false,
+        "require": false,
+
+        "jasmine" : false,
+        "describe" : false,
+        "it" : false,
+        "expect" : false,
+        "beforeEach" : false,
+        "afterEach" : false,
+        "spyOn" : false
+    },
+    "expr": true,           // Suppress the warning about expressions used instead of assignments or function calls
+    "evil": true,
+    "immed": true,
+    "noarg": true,
+    "undef": true,
+    "sub": true,
+    "trailing": true,
+    "indent": 4,
+    "smarttabs": true,
+    "curly": true,
+    "newcap": true,
+    "plusplus": false,
+    "quotmark": "single",
+    "unused": false,        // Suppress var defined but not used
+    "strict": true,
+    "maxparams": 5,
+    "maxcomplexity": 10,
+    "browser": true,
+    "node": true,
+    "devel": true,
+    "nonew": true
+}
