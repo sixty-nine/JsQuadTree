@@ -1,6 +1,8 @@
 define(function (require) {
     'use strict';
 
+    require('bootstrapjs');
+
     var MAX_POINTS = 2500;
 
     var Point = require('./model/Point'),
