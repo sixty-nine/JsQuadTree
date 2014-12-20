@@ -13,17 +13,13 @@ module.exports = function (grunt) {
     };
 
     var getIndexPath = function () {
-        var indexPath = 'src/js/bootstrap.js';
-        if (grunt.config('target') !== 'development') {
-            indexPath = 'build/dist/js/bootstrap.js';
-        }
-        return indexPath;
-    };
+        return grunt.config('target') === 'development' ? 'src/index.html' : 'dist/index.html'
+    }
 
     grunt.registerTask('buildTemplates', 'Builds templates site', function () {
 
         var target = grunt.config('target');
-        var mainJsTemplate = grunt.file.read('build/bootstrap.js.tpl');
+        var indexTemplate = grunt.file.read('build/index.html.tpl');
 
         /**
          * Load in target specific configuration file
@@ -37,9 +33,18 @@ module.exports = function (grunt) {
             requirejs : buildRequirejsConfig()
         };
 
-        var processedMainJs = grunt.template.process(mainJsTemplate, { data : data });
-        grunt.file.write(getIndexPath(), processedMainJs);
+        if (grunt.config('target') === 'development') {
+            grunt.file.write(
+                'src/js/bootstrap.js',
+                grunt.template.process(
+                    grunt.file.read('build/bootstrap.js.tpl'),
+                    { data : data }
+                )
+            );
+        }
 
+        var processedIndex = grunt.template.process(indexTemplate, { data : data });
+        grunt.file.write(getIndexPath(), processedIndex);
     });
 
     grunt.registerTask('buildRequirejsConfig', function () {
