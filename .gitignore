@@ -2,5 +2,6 @@ dist/
 node_modules/
 bower_components/
 
+src/index.html
 src/js/bootstrap.js
 
