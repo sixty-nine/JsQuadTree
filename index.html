@@ -5,22 +5,36 @@
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/kineticjs/5.0.6/kinetic.js"></script>
 </head>
 <body>
 
+<canvas id="myCanvas" width="400" height="400"></canvas>
+
 <script type="text/javascript" src="js/quadtree.js"></script>
 <script type="text/javascript">
+
+    var canvas = document.getElementById('myCanvas');
+    var context = canvas.getContext('2d');
 
     $(document).ready(function () {
 
         var p1 = new SixtyNine.Point(15, 15),
             bb1 = new SixtyNine.BoundingBox(5, 5, 5),
-            bb2 = new SixtyNine.BoundingBox(15, 15, 5);
+            bb2 = new SixtyNine.BoundingBox(15, 15, 5),
+            boundaries = new SixtyNine.BoundingBox(10, 10, 10);
 
-//        expect(bb1.contains(p1)).toBeTrue();
-//        expect(bb2.contains(p1)).toBeFalse();
-//        expect(bb1.intersects(bb2)).toBeTrue();
-//        expect(bb2.intersects(bb1)).toBeTrue();
+        var tree = new SixtyNine.QuadTree(boundaries);
+
+        var MAX_POINTS = 1000;
+
+        for (var i = 0; i < MAX_POINTS; i++) {
+            var x = Math.random() * 20,
+                y = Math.random() * 20;
+            tree.insert(new SixtyNine.Point(x, y));
+        }
+
+        tree.draw(context);
     });
 
 </script>

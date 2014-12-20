@@ -3,13 +3,25 @@ var SixtyNine = SixtyNine || {};
 
 (function () {
 
-
+    var DISPLAY_MULT = 20;
     var NODE_CAPACITY = 4;
     var MAX_DEPTH = Infinity;
+
+    function log() {
+//        console.log(arguments);
+    }
 
     SixtyNine.Point = function (x, y) {
         this.x = x;
         this.y = y;
+
+        this.draw = function (context) {
+            context.beginPath();
+            context.arc(DISPLAY_MULT * x, DISPLAY_MULT * y, 2, 0, 2 * Math.PI, false);
+            context.lineWidth = 1;
+            context.strokeStyle = '#003300';
+            context.stroke();
+        };
     };
 
     SixtyNine.BoundingBox = function (x, y, halfSize) {
@@ -40,6 +52,14 @@ var SixtyNine = SixtyNine || {};
                 })
             );
         };
+
+        this.draw = function (context) {
+            context.beginPath();
+            context.rect(DISPLAY_MULT * (x - halfSize), DISPLAY_MULT * (y - halfSize), 2 * DISPLAY_MULT * halfSize, 2 * DISPLAY_MULT * halfSize);
+            context.lineWidth = 1;
+            context.strokeStyle = 'black';
+            context.stroke();
+        };
     };
 
     SixtyNine.QuadTree = function (boundaries) {
@@ -49,15 +69,27 @@ var SixtyNine = SixtyNine || {};
         this.children = [];
         this.points = [];
 
+        this.draw = function (context) {
+            boundaries.draw(context);
+            _.each(this.children, function (child) {
+                child.draw(context);
+            });
+            _.each(this.points, function (point) {
+                point.draw(context);
+            });
+        };
+
         this.insert = function (point, depth) {
 
-            depth = depth || 0;
+            var self = this;
+
+            this.depth = depth || 0;
 
             if (!this.boundaries.contains(point)) {
                 return false;
             }
 
-            if (depth > MAX_DEPTH || this.points.length < NODE_CAPACITY) {
+            if (this.depth > MAX_DEPTH || (!this.isDivided && this.points.length < NODE_CAPACITY)) {
                 this.points.push(point);
                 return true;
             }
@@ -68,13 +100,54 @@ var SixtyNine = SixtyNine || {};
 
             return !_.isUndefined(
                 _.find(this.children, function (child) {
-                    return child.insert(point, depth + 1);
+                    return child.insert(point, self.depth + 1);
                 })
             );
         };
 
         this.subdivide = function () {
+
+            log('SUBDIVIDE');
+            var self = this,
+                centerX = this.boundaries.x,
+                centerY = this.boundaries.y,
+                halfHalfSize = this.boundaries.halfSize / 2,
+                bb1 = new SixtyNine.BoundingBox(centerX - halfHalfSize, centerY - halfHalfSize, halfHalfSize),
+                bb2 = new SixtyNine.BoundingBox(centerX + halfHalfSize, centerY - halfHalfSize, halfHalfSize),
+                bb3 = new SixtyNine.BoundingBox(centerX - halfHalfSize, centerY + halfHalfSize, halfHalfSize),
+                bb4 = new SixtyNine.BoundingBox(centerX + halfHalfSize, centerY + halfHalfSize, halfHalfSize),
+                t1 = new SixtyNine.QuadTree(bb1),
+                t2 = new SixtyNine.QuadTree(bb2),
+                t3 = new SixtyNine.QuadTree(bb3),
+                t4 = new SixtyNine.QuadTree(bb4);
+
+            this.children.push(t1);
+            this.children.push(t2);
+            this.children.push(t3);
+            this.children.push(t4);
+
+            _.each(this.children, function (child) {
+                log('Child:', child.boundaries);
+            });
+
+            while(point = this.points.pop()) {
+                log('Relocating', point);
+                if (t1.insert(point, self.depth + 1)) {
+                    log('Inserted in child 1');
+                } else if (t2.insert(point, self.depth + 1)) {
+                    log('Inserted in child 2');
+                } else if (t3.insert(point, self.depth + 1)) {
+                    log('Inserted in child 3');
+                } else if (t4.insert(point, self.depth + 1)) {
+                    log('Inserted in child 4');
+                } else {
+                    log('ERROR: cannot insert');
+                }
+            }
+
             this.isDivided = true;
+
+
         };
 
         this.queryRange = function (bb) {
