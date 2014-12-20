@@ -1,6 +1,6 @@
 module.exports = {
     scripts: {
-        files: ['build/bootstrap.js.tpl', 'build/requirejs.json.tpl', 'build/config/config.json', 'build/config/development.json',  'build/config/production.json'],
+        files: ['build/index.html.tpl', 'build/bootstrap.js.tpl', 'build/requirejs.json.tpl', 'build/config/config.json', 'build/config/development.json',  'build/config/production.json'],
         tasks: ['build'],
         options: {
             spawn: false
