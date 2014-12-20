@@ -26,7 +26,7 @@
     "quotmark": "single",
     "unused": false,        // Suppress var defined but not used
     "strict": true,
-    "maxparams": 5,
+    "maxparams": 6,
     "maxcomplexity": 10,
     "browser": true,
     "node": true,

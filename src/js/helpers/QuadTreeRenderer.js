@@ -3,43 +3,29 @@ define(function (require) {
 
     var DISPLAY_MULT = 40;
 
-    var _ = require('underscore');
+    var _ = require('underscore'),
+        Canvas = require('./Canvas');
 
-    function drawPoint(context, point) {
-        context.beginPath();
-        context.arc(DISPLAY_MULT * point.x, DISPLAY_MULT * point.y, 2, 0, 2 * Math.PI, false);
-        context.lineWidth = 1;
-        context.strokeStyle = '#003300';
-        context.stroke();
-    }
+    function drawQuadTree(context, node, hideGrid) {
 
-    function drawBoundingBox(context, bb) {
-        context.beginPath();
-        context.rect(
-            DISPLAY_MULT * (bb.x - bb.halfSize), DISPLAY_MULT * (bb.y - bb.halfSize),
-            2 * DISPLAY_MULT * bb.halfSize, 2 * DISPLAY_MULT * bb.halfSize
-        );
-        context.lineWidth = 1;
-        context.strokeStyle = 'black';
-        context.stroke();
-    }
+        var canvas = new Canvas(context);
 
-    function drawQuadTree(context, node) {
-
-        drawBoundingBox(context, node.boundaries);
+        if (hideGrid !== true) {
+            canvas.drawBoundingBox(node.boundaries, 'black');
+        }
 
         _.each(node.children, function (child) {
-            drawQuadTree(context, child);
+            drawQuadTree(context, child, hideGrid);
         });
 
         _.each(node.points, function (point) {
-            drawPoint(context, point);
+            canvas.drawPoint(point, 'blue');
         });
     }
 
     return function (context) {
-        this.renderTree = function (root) {
-            drawQuadTree(context, root);
+        this.renderTree = function (root, hideGrid) {
+            drawQuadTree(context, root, hideGrid);
         };
     };
 
