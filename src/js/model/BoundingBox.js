@@ -39,7 +39,7 @@
             return memo === null ? edge.toJSON() : memo +', ' + edge.toJSON();
         }, null);
         return '[' + res + ']';
-    }
+    };
 
     return BoundingBox;
 });

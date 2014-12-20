@@ -8,7 +8,7 @@ define(function (require) {
 
     Point.prototype.toJSON = function(){
         return '(' + this.x + ', ' + this.y + ')';
-    }
+    };
 
     return Point;
 });
