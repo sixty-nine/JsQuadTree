@@ -73,38 +73,25 @@ define(function (require) {
         };
 
         this.queryRange = function (bb) {
-            /*
-             TODO: implement
 
-             Pseudo code from wikipedia
-             ==========================
+            var pointsInRange = [];
 
-             // Prepare an array of results
-             Array of XY pointsInRange;
+            if (this.boundaries.intersects(bb)) {
 
-             // Automatically abort if the range does not intersect this quad
-             if (!boundary.intersectsAABB(range))
-             return pointsInRange; // empty list
+                for (var i = 0; i < this.points.length; i++) {
+                    if (bb.contains(this.points[i])) {
+                        pointsInRange.push(this.points[i]);
+                    }
+                }
 
-             // Check objects at this quad level
-             for (int p := 0; p < points.size; p++)
-             {
-             if (range.containsPoint(points[p]))
-             pointsInRange.append(points[p]);
-             }
+                if (this.isDivided) {
+                    _.each(this.children, function (child) {
+                        pointsInRange = pointsInRange.concat(child.queryRange(bb));
+                    });
+                }
+            }
 
-             // Terminate here, if there are no children
-             if (northWest == null)
-             return pointsInRange;
-
-             // Otherwise, add the points from the children
-             pointsInRange.appendArray(northWest->queryRange(range));
-             pointsInRange.appendArray(northEast->queryRange(range));
-             pointsInRange.appendArray(southWest->queryRange(range));
-             pointsInRange.appendArray(southEast->queryRange(range));
-
-             return pointsInRange;
-             */
+            return pointsInRange;
         };
     };
 
