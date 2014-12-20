@@ -2,7 +2,7 @@ define(function (require) {
     'use strict';
 
     var NODE_CAPACITY = 4;
-    var MAX_DEPTH = Infinity;
+    var MAX_DEPTH = 50;
 
     var BoundingBox = require('./BoundingBox'),
         QuadTree;
@@ -26,7 +26,7 @@ define(function (require) {
                 return false;
             }
 
-            if (this.depth > MAX_DEPTH || (!this.isDivided && this.points.length < NODE_CAPACITY)) {
+            if (this.depth >= MAX_DEPTH || (!this.isDivided && this.points.length < NODE_CAPACITY)) {
                 this.points.push(point);
                 return true;
             }
