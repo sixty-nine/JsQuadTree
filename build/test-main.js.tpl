@@ -5,7 +5,7 @@
     var TEST_REGEXP = /Spec\.js$/;
 
     var pathToModule = function (path) {
-        return path.replace(/^\/base\/frontend\/app\//, '');
+        return path.replace(/^\/base\/src\/js\//, '');
     };
 
     Object.keys(window.__karma__.files).forEach(function (file) {

@@ -17,12 +17,12 @@ module.exports = function (config) {
 
         // list of files / patterns to load in the browser
         files: [
-            {pattern: 'frontend/bower_components/**/*.js', included: false },
-            {pattern: 'frontend/static_files/**/*.js', included: false },
+            {pattern: 'src/bower_components/**/*.js', included: false },
+//            {pattern: 'src/static_files/**/*.js', included: false },
             //App code
-            {pattern: 'frontend/app/**/*.js', included: false },
-            //App templates
-            {pattern: 'frontend/app/**/*.hbs', included: false, served : true },
+            {pattern: 'src/js/**/*.js', included: false },
+//            //App templates
+//            {pattern: 'src/js/**/*.hbs', included: false, served : true },
             {pattern: 'test/unit/**/*Spec.js', included: false },
 
             'test/unit/test-main.js'

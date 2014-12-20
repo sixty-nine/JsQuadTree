@@ -48,14 +48,10 @@ define(function (require) {
                 centerX = this.boundaries.x,
                 centerY = this.boundaries.y,
                 halfHalfSize = this.boundaries.halfSize / 2,
-                bb1 = new BoundingBox(centerX - halfHalfSize, centerY - halfHalfSize, halfHalfSize),
-                bb2 = new BoundingBox(centerX + halfHalfSize, centerY - halfHalfSize, halfHalfSize),
-                bb3 = new BoundingBox(centerX - halfHalfSize, centerY + halfHalfSize, halfHalfSize),
-                bb4 = new BoundingBox(centerX + halfHalfSize, centerY + halfHalfSize, halfHalfSize),
-                t1 = new QuadTree(bb1),
-                t2 = new QuadTree(bb2),
-                t3 = new QuadTree(bb3),
-                t4 = new QuadTree(bb4),
+                t1 = new QuadTree(new BoundingBox(centerX - halfHalfSize, centerY - halfHalfSize, halfHalfSize)),
+                t2 = new QuadTree(new BoundingBox(centerX + halfHalfSize, centerY - halfHalfSize, halfHalfSize)),
+                t3 = new QuadTree(new BoundingBox(centerX - halfHalfSize, centerY + halfHalfSize, halfHalfSize)),
+                t4 = new QuadTree(new BoundingBox(centerX + halfHalfSize, centerY + halfHalfSize, halfHalfSize)),
                 point;
 
             this.children.push(t1);

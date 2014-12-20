@@ -8,7 +8,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('buildTest', function () {
 
-        var testMainTemplate = grunt.file.read('build/test-main.js-tpl');
+        var testMainTemplate = grunt.file.read('build/test-main.js.tpl');
 
         var data = {
             requirejs : buildRequirejsConfig()

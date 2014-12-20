@@ -1,10 +1,11 @@
-define(function (require) {
+    define(function (require) {
     'use strict';
 
     var _ = require('underscore'),
-        Point = require('./Point');
+        Point = require('./Point'),
+        BoundingBox;
 
-    return function (x, y, halfSize) {
+    BoundingBox = function (x, y, halfSize) {
 
         this.x = x;
         this.y = y;
@@ -25,13 +26,20 @@ define(function (require) {
         };
 
         this.intersects = function (bb) {
-            var self = this;
-            return !_.isUndefined(
-                _.find(bb.edges, function (point) {
-                    return self.contains(point);
-                })
-            );
+            if (x + halfSize < bb.x - bb.halfSize || bb.x + bb.halfSize < x - halfSize ||
+                y + halfSize < bb.y - bb.halfSize || bb.y + bb.halfSize < y - halfSize) {
+                return false;
+            }
+            return true;
         };
-
     };
+
+    BoundingBox.prototype.toJSON = function () {
+        var res = _.reduce(this.edges, function (memo, edge) {
+            return memo === null ? edge.toJSON() : memo +', ' + edge.toJSON();
+        }, null);
+        return '[' + res + ']';
+    }
+
+    return BoundingBox;
 });

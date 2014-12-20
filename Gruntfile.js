@@ -24,22 +24,22 @@ module.exports = function (grunt) {
     grunt.initConfig(config);
     grunt.loadTasks('build/tasks');
     require('load-grunt-tasks')(grunt);
-//    grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-karma');
 
     /**
      * Serves the application from localhost:9001
      */
     grunt.registerTask('serve', [ 'jshint', 'build', 'connect', 'watch']);
 
-//    /**
-//     * Runs the tests
-//     */
-//    grunt.registerTask('test', [ 'buildTest', 'karma:unit' ]);
-//
-//    /**
-//     * Runs the tests in a continuous environemnt (CI server)
-//     */
-//    grunt.registerTask('test:continuous', [ 'buildTest', 'karma:continuous' ]);
-//
+    /**
+     * Runs the tests
+     */
+    grunt.registerTask('test', [ 'buildTest', 'karma:unit' ]);
+
+    /**
+     * Runs the tests in a continuous environemnt (CI server)
+     */
+    grunt.registerTask('test:continuous', [ 'buildTest', 'karma:continuous' ]);
+
 
 };
