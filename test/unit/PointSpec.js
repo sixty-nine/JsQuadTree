@@ -8,8 +8,8 @@ define(function (require) {
         it('constructs properly', function () {
 
             var p = new Point(123, 321);
-            expect(p.hasOwnProperty('x')).toBe(true);
-            expect(p.hasOwnProperty('y')).toBe(true);
+            expect(p.x).toBeDefined();
+            expect(p.y).toBeDefined();
             expect(p.x).toBe(123);
             expect(p.y).toBe(321);
         });

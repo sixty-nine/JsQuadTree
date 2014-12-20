@@ -11,10 +11,10 @@ define(function (require) {
 
         it('constructs properly', function () {
 
-            expect(bb1.hasOwnProperty('x')).toBe(true);
-            expect(bb1.hasOwnProperty('y')).toBe(true);
-            expect(bb1.hasOwnProperty('halfSize')).toBe(true);
-            expect(bb1.hasOwnProperty('edges')).toBe(true);
+            expect(bb1.x).toBeDefined();
+            expect(bb1.y).toBeDefined();
+            expect(bb1.halfSize).toBeDefined();
+            expect(bb1.edges).toBeDefined();
             expect(bb1.x).toBe(10);
             expect(bb1.y).toBe(15);
             expect(bb1.halfSize).toBe(5);
