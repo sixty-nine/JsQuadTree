@@ -5,3 +5,5 @@ bower_components/
 src/index.html
 src/js/bootstrap.js
 
+test/unit/test-main.js
+
