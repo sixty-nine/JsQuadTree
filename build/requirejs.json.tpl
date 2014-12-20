@@ -7,5 +7,8 @@
             "bootstrapjs": "<%= path %>bower_components/bootstrap/dist/js/bootstrap"
         },
         "shim": {
+            "bootstrapjs": {
+                "deps": [ "jquery" ]
+            }
         }
     }
