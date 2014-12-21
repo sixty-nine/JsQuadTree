@@ -9,11 +9,9 @@
 
     <link rel="shortcut icon" href="static_files/favicon.ico" type="image/x-icon" />
 
-    <% if(target == 'development') { %>
-    <link href="<%- config.paths.root %>/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <% } else { %>
+    
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <% } %>
+    
 
 </head>
 <body>
@@ -38,11 +36,9 @@
     </div>
 </div>
 
-<% if(target == 'development') { %>
-<script data-main="<%- config.paths.root %>/js/bootstrap.js" src="<%- config.paths.root %>/bower_components/requirejs/require.js"></script>
-<% } else { %>
+
 <script src="js/build.min.js"></script>
-<% } %>
+
 
 </body>
 </html>
