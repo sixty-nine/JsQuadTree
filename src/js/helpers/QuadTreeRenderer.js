@@ -11,7 +11,7 @@ define(function (require) {
         var canvas = new Canvas(context);
 
         if (hideGrid !== true) {
-            canvas.drawBoundingBox(node.boundaries, 'black');
+            canvas.drawBoundingBox(node.boundaries, 'grey');
         }
 
         _.each(node.children, function (child) {
@@ -19,7 +19,7 @@ define(function (require) {
         });
 
         _.each(node.points, function (point) {
-            canvas.drawPoint(point, 'blue');
+            canvas.drawPoint(point, 'blue', true);
         });
     }
 
